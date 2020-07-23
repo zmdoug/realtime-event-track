@@ -1,0 +1,23 @@
+{
+  "name": "realtime-event-track",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmdoug/realtime-event-track.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmdoug/realtime-event-track/issues"
+  },
+  "homepage": "https://github.com/zmdoug/realtime-event-track#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
