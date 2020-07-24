@@ -24,6 +24,19 @@
     button {
       padding: 16px;
       margin: 16px;
+      background: #ccc;
+      border-radius: 8px;
+      color: #212121;
+    }
+
+    .eventButtons {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .eventButtons button {
+      padding: 16px;
+      margin: 16px;
       background: #6800ff;
       border-radius: 8px;
       color: white;
@@ -35,16 +48,33 @@
   <div class="content">
     <h2>Click the button twice</h2>
     <span>Try with an interval of <strong>more</strong> and <strong>less</strong> than <strong>3 seconds</strong></span>
-    <button onclick="sendEvent('applicationCreatedFromBottomBtn')">Button</button>
+
+    <div class="eventButtons">
+      <button onclick="sendEvent('applicationCreatedEvent1')">Event 1</button>
+      <button onclick="sendEvent('applicationCreatedEvent2')">Event 2</button>
+    </div>
+    <p>
+      <button onclick="getReport()">click here</button> to see your report.
+    </p>
+
+    <div class="result"></div>
   </div>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
     var socket = io();
+    var profileId = Math.random();
+    function getReport() {
+      $.get("/report/" + profileId, function (data) {
+        $('.result').html('');
+        let html = data.map(event => `<p>Event: ${event.name} - ${event.date}</p>`)
+        $('.result').html(html);
+      });
+    }
     function sendEvent(userEventName) {
       socket.emit('user_event', {
         companyId: 123,
-        profileId: 987,
+        profileId,
         name: userEventName
       });
       return false;
